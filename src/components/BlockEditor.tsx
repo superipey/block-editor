@@ -1,5 +1,6 @@
-import { createElement, useRef } from '@wordpress/element'
+import {createElement, useRef} from '@wordpress/element'
 import {
+    BlockEditorKeyboardShortcuts,
     BlockEditorProvider,
     BlockInspector,
     BlockList,
@@ -7,10 +8,9 @@ import {
     Inserter,
     ObserveTyping,
     WritingFlow,
-    BlockEditorKeyboardShortcuts,
 } from '@wordpress/block-editor'
-import { ToolbarButton, Popover } from '@wordpress/components'
-import { undo as undoIcon, redo as redoIcon } from '@wordpress/icons'
+import {Popover, ToolbarButton} from '@wordpress/components'
+import {redo as redoIcon, undo as undoIcon} from '@wordpress/icons'
 
 import Header from './Header'
 import Sidebar from './Sidebar'
@@ -31,8 +31,8 @@ interface BlockEditorProps {
     canRedo?: boolean
 }
 
-const BlockEditor = ({ settings, onChange, blocks, undo, redo, canUndo, canRedo }: BlockEditorProps) => {
-    const inputTimeout = useRef<NodeJS.Timeout|null>(null)
+const BlockEditor = ({settings, onChange, blocks, undo, redo, canUndo, canRedo}: BlockEditorProps) => {
+    const inputTimeout = useRef<NodeJS.Timeout | null>(null)
 
     const handleInput = (blocks: Block[]) => {
         if (inputTimeout.current) {
@@ -62,19 +62,19 @@ const BlockEditor = ({ settings, onChange, blocks, undo, redo, canUndo, canRedo 
             >
                 <Notices/>
                 <Header.Fill>
-                    <Inserter renderToggle={InserterToggle} />
-                    <ToolbarButton icon={undoIcon} onClick={undo} disabled={!canUndo} className={'history-button'} />
-                    <ToolbarButton icon={redoIcon} onClick={redo} disabled={!canRedo} className={'history-button'} />
+                    <Inserter renderToggle={InserterToggle}/>
+                    <ToolbarButton icon={undoIcon} onClick={undo} disabled={!canUndo} className={'history-button'}/>
+                    <ToolbarButton icon={redoIcon} onClick={redo} disabled={!canRedo} className={'history-button'}/>
                 </Header.Fill>
                 <Sidebar.Fill>
-                    <BlockInspector />
+                    <BlockInspector/>
                 </Sidebar.Fill>
                 <BlockTools>
                     <BlockEditorKeyboardShortcuts.Register/>
                     <div className="editor-styles-wrapper">
                         <WritingFlow>
                             <ObserveTyping>
-                                <BlockList />
+                                <BlockList/>
                             </ObserveTyping>
                         </WritingFlow>
                     </div>
